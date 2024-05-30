@@ -3,7 +3,13 @@
 title __SERIALPLOTTER's Class Diagram__\n
 
   namespace  {
-    class GUIJavaFX {
+    class ConnexionStatus {
+    }
+  }
+  
+
+  namespace  {
+    class DataVisualizer {
     }
   }
   
@@ -39,17 +45,39 @@ title __SERIALPLOTTER's Class Diagram__\n
   
 
   namespace  {
+    class RawDataDisplay {
+    }
+  }
+  
+
+  namespace  {
     class Sample {
     }
   }
   
 
-  GUIJavaFX -up-|> javafx.application.Application
+  namespace  {
+    enum Status {
+    }
+  }
+  
+
+  ConnexionStatus .up.|> java.lang.Runnable
+  ConnexionStatus -up-|> javax.swing.JComponent
+  ConnexionStatus o-- Status : status
+  DataVisualizer -up-|> javax.swing.JComponent
   GUI_CommPortConfig -up-|> javax.swing.JPanel
   GUI_GlobalConfig -up-|> javax.swing.JFrame
   GUI_MainWindow -up-|> javax.swing.JFrame
   GUI_MainWindow o-- GUI_CommPortConfig : commPortConfig
+  GUI_MainWindow o-- ConnexionStatus : connexionStatus
+  GUI_MainWindow o-- DataVisualizer : dataVisualizer
+  GUI_MainWindow o-- PacketListener : packetListener
+  GUI_MainWindow o-- RawDataDisplay : rawDataDisplay
   PacketListener .up.|> com.fazecast.jSerialComm.SerialPortMessageListener
+  PacketListener o-- ConnexionStatus : connexionStatus
+  RawDataDisplay .up.|> java.lang.Runnable
+  RawDataDisplay -up-|> javax.swing.JFrame
 
 
 right footer

@@ -27,7 +27,8 @@ This first one has been obtained with ELF code test at 115200 bps and show timin
 The second one has been obtained with ELF code test at 1000000 (1Mbps) and has no timing problems.
 ![](Screenshot/SinusGeneration1Mbps.png)
 
-The code is poorly commented...
+The code is poorly commented... But here's an architecture overview :
+![](Screenshot/Serial_Plotter_UML_Diagram.png)
 
 Enjoy and feel free to make pull request.
 
