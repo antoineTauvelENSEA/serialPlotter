@@ -21,7 +21,7 @@ public class GUI_MainWindow extends JFrame{
     private JSlider xAxisSlider = new JSlider ();
     private JLabel xAxisLabel = new JLabel("Echelle X : 128");
     private JSlider yAxisSlider = new JSlider ();
-    private JLabel yAxisLabel = new JLabel("Echelle X : 128");
+    private JLabel yAxisLabel = new JLabel("Echelle Y : 1024");
     private JCheckBox isTriggered = new JCheckBox();
     private JLabel isTriggeredLable = new JLabel("Trigger");
     private SerialPort currentComPort=null;
@@ -58,7 +58,7 @@ public class GUI_MainWindow extends JFrame{
 
         yAxisSlider.setMaximum(2048);
         yAxisSlider.setMinimum(128);
-        yAxisSlider.setValue(128);
+        yAxisSlider.setValue(1024);
         yAxisSlider.addChangeListener((e)->{
             dataVisualizer.setyAxis(yAxisSlider.getValue());
             yAxisLabel.setText("Echelle Y : "+yAxisSlider.getValue());});
@@ -80,6 +80,7 @@ public class GUI_MainWindow extends JFrame{
 
         this.add(globalPanel);
         this.setSize(800,600);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
 
         dataButton.addActionListener((e)->this.rawDataDisplay.toggleVisibility());

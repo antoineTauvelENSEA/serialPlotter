@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="serialPlotter">
-    <output-path>$PROJECT_DIR$/out/artifacts/serialPlotter</output-path>
-    <root id="archive" name="serialPlotter.jar">
-      <element id="module-output" name="serialPlotter" />
-      <element id="library" level="project" name="jSerialComm-2.10.4" />
-    </root>
-  </artifact>
-</component>
