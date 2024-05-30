@@ -3,12 +3,14 @@ public class Sample {
     double valueA;
     double valueB;
 
+
     public Sample(double valueA) {
         this.valueA = valueA;
+        this.valueB = Double.NaN;
     }
 
-    public Sample(int timeStamp, double valueA) {
-        this.timeStamp = timeStamp;
+    public Sample(double valueA, double valueB) {
+        this.valueB = valueB;
         this.valueA = valueA;
     }
 

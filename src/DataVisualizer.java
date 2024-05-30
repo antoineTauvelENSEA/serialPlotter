@@ -78,6 +78,24 @@ public class DataVisualizer extends JComponent {
                 oldX = x;
                 oldY = y;
             }
+                    // Factorisation de code à faire !
+            graphics.setColor( new Color( 0, 128, 255 ) );
+
+            if (!Double.isNaN((circularBuffer.get(0).valueB))){
+                oldX= xToPixel(0);
+                oldY= yToPixel(circularBuffer.get(firstValue).valueB);
+
+                for( int i=1;i<circularBuffer.size()-firstValue;i++) {
+                    int index=(i+firstValue);
+                    int x = xToPixel( i );
+                    int y = yToPixel( circularBuffer.get(index).valueB );
+
+                    graphics.drawLine( x, y, oldX, oldY );
+
+                    oldX = x;
+                    oldY = y;
+                }
+            }
         }
     }
 

@@ -43,7 +43,7 @@ public final class PacketListener implements SerialPortMessageListener
                 sample = new Sample(Double.valueOf(newDataArray[0]));
                 break;
             case 2 :
-                sample = new Sample(Integer.valueOf(newDataArray[0]), Double.valueOf(newDataArray[1]));
+                sample = new Sample(Double.valueOf(newDataArray[0]), Double.valueOf(newDataArray[1]));
                 break;
             case 3 :
                 sample = new Sample(Integer.valueOf(newDataArray[0]), Double.valueOf(newDataArray[1]), Double.valueOf(newDataArray[2]));
