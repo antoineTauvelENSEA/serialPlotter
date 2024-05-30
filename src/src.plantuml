@@ -1,0 +1,91 @@
+@startuml
+
+title __Serial Plotter Class Diagram__\n
+
+
+  
+
+  namespace SerialPlotter {
+    class GUI_CommPortConfig {
+        ~ baudRateChooser : JComboBox
+        - comPortChooser : JComboBox
+        {static} - instance : GUI_CommPortConfig
+        - portList : ArrayList<String>
+        - possibleBaudRate : String[]
+        - serialPorts : SerialPort[]
+        + getBaudRate()
+        + getCurrentComPort()
+        {static} + getInstance()
+        - GUI_CommPortConfig()
+        - enumerate()
+    }
+  }
+  
+
+  namespace SerialPlotter {
+    class GUI_GlobalConfig {
+        - hasTimeStamp : boolean
+        {static} - instance : GUI_GlobalConfig
+        {static} + getInstance()
+        {static} + main()
+        - GUI_GlobalConfig()
+    }
+  }
+  
+
+  namespace SerialPlotter  {
+    class GUI_MainWindow {
+        {static} - instance : GUI_MainWindow
+        {static} + getInstance()
+        {static} + main()
+        - GUI_MainWindow()
+    }
+  }
+  
+
+  namespace SerialPlotter {
+    class Main {
+        {static} + main()
+    }
+  }
+  
+
+  namespace SerialPlotter  {
+    class PacketListener {
+        - bufferSize : int
+        - circularBuffer : ArrayList<Sample>
+        + delimiterIndicatesEndOfMessage()
+        + getListeningEvents()
+        + getMessageDelimiter()
+        + serialEvent()
+    }
+  }
+  
+
+  namespace SerialPlotter {
+    class Sample {
+        ~ timeStamp : int
+        ~ valueA : double
+        ~ valueB : double
+        + Sample()
+        + Sample()
+        + Sample()
+        + toString()
+    }
+  }
+  
+
+  SerialPlotter.GUI_CommPortConfig -up-|> javax.swing.JPanel
+  SerialPlotter.GUI_GlobalConfig -up-|> javax.swing.JFrame
+  SerialPlotter.GUI_MainWindow -up-|> javax.swing.JFrame
+  SerialPlotter.GUI_MainWindow o-- SerialPlotter.GUI_CommPortConfig : commPortConfig
+  SerialPlotter.PacketListener .up.|> com.fazecast.jSerialComm.SerialPortMessageListener
+
+
+right footer
+
+
+A.T. for Exam ENSEA
+endfooter
+
+@enduml
