@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class GUI_CommPortConfig extends JPanel {
     private SerialPort[] serialPorts = SerialPort.getCommPorts();
     private ArrayList<String> portList= new ArrayList<>();
-    private final String[] possibleBaudRate={"9600","115200","230400","1000000"};
+    private final String[] possibleBaudRate={"9600","115200","230400","460800","921600","1000000"};
     JComboBox baudRateChooser = new JComboBox(possibleBaudRate);
 
     private static volatile GUI_CommPortConfig instance = null;

@@ -5,22 +5,24 @@ import java.util.ArrayList;
 public final class PacketListener implements SerialPortMessageListener
 {
     private ConnexionStatus connexionStatus;
+    private RawDataDisplay rawDataDisplay;
 
-    public PacketListener(ConnexionStatus connexionStatus) {
+    public PacketListener(ConnexionStatus connexionStatus, RawDataDisplay rawDataDisplay) {
         this.connexionStatus = connexionStatus;
+        this.rawDataDisplay = rawDataDisplay;
     }
 
-    public void setBufferSize(int bufferSize) {
+   /* public void setBufferSize(int bufferSize) {
         if (bufferSize>0) this.bufferSize = bufferSize;
         circularBuffer.clear();
-    }
+    }*/
 
     public ArrayList<Sample> getCircularBuffer() {
         return circularBuffer;
     }
 
     private ArrayList<Sample> circularBuffer = new ArrayList<>();
-    private int bufferSize = 128;
+    private final int bufferSize = 256;
 
     @Override
     public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_RECEIVED; }
@@ -34,6 +36,7 @@ public final class PacketListener implements SerialPortMessageListener
         for (int i = 0; i < newData.length; ++i) {
             newDataString=newDataString+(char) newData[i];
         }
+        rawDataDisplay.addToString(newDataString);
         String[] newDataArray=newDataString.split((char) 9 +"| ");
         Sample sample=null;
         switch (newDataArray.length){

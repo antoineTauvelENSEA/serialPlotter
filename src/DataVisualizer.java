@@ -7,6 +7,11 @@ public class DataVisualizer extends JComponent {
     private final int division=8;
     private boolean isTriggered=false;
     private int yAxis=1024;
+    private int xAxis=100;
+
+    public void setxAxis(int xAxis) {
+        this.xAxis = xAxis;
+    }
 
     public void setTriggered(boolean triggered) {
         isTriggered = triggered;
@@ -44,7 +49,7 @@ public class DataVisualizer extends JComponent {
         // --- Draw values ---
         graphics.setColor( Color.BLACK );
         graphics.drawString( "0", (int)(getWidth()*0.02), (int)(getHeight()*0.98));
-        graphics.drawString( Integer.toString(circularBuffer.size()), (int)(getWidth()*0.98), (int)(getHeight()*0.98));
+        graphics.drawString( Integer.toString(xAxis), (int)(getWidth()*0.98), (int)(getHeight()*0.98));
         graphics.drawString( Integer.toString(-yAxis/2), (int)(getWidth()*0.01), (int)(getHeight()*0.96));
         graphics.drawString( "+"+Integer.toString(yAxis/2), (int)(getWidth()*0.01), (int)(getHeight()*0.04));
 
@@ -68,7 +73,7 @@ public class DataVisualizer extends JComponent {
             int oldX= xToPixel(0);
             int oldY= yToPixel(circularBuffer.get(firstValue).valueA);
 
-            for( int i=1;i<circularBuffer.size()-firstValue;i++) {
+            for( int i=1;i<xAxis && i<circularBuffer.size()-firstValue;i++) {
                 int index=(i+firstValue);
                 int x = xToPixel( i );
                 int y = yToPixel( circularBuffer.get(index).valueA );
@@ -85,7 +90,7 @@ public class DataVisualizer extends JComponent {
                 oldX= xToPixel(0);
                 oldY= yToPixel(circularBuffer.get(firstValue).valueB);
 
-                for( int i=1;i<circularBuffer.size()-firstValue;i++) {
+                for( int i=1;(i<circularBuffer.size()-firstValue)&&(i<xAxis);i++) {
                     int index=(i+firstValue);
                     int x = xToPixel( i );
                     int y = yToPixel( circularBuffer.get(index).valueB );
@@ -100,7 +105,7 @@ public class DataVisualizer extends JComponent {
     }
 
     private int xToPixel( double x ) {
-        return (int)( getWidth() * (x/circularBuffer.size()) );
+        return (int)( getWidth() * (x/xAxis));
     }
 
     private int yToPixel( double y ) {

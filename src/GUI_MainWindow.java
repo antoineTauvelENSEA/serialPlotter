@@ -14,7 +14,8 @@ public class GUI_MainWindow extends JFrame{
 
     private GUI_CommPortConfig commPortConfig = GUI_CommPortConfig.getInstance();
     private ConnexionStatus connexionStatus = new ConnexionStatus();
-    private PacketListener packetListener= new PacketListener(connexionStatus);
+    private RawDataDisplay rawDataDisplay=new RawDataDisplay();
+    private PacketListener packetListener= new PacketListener(connexionStatus,rawDataDisplay);
     private DataVisualizer dataVisualizer = new DataVisualizer(packetListener.getCircularBuffer());
     private JButton runButton = new JButton("RUN");
     private JButton dataButton = new JButton("DATA");
@@ -25,11 +26,10 @@ public class GUI_MainWindow extends JFrame{
     private JCheckBox isTriggered = new JCheckBox();
     private JLabel isTriggeredLable = new JLabel("Trigger");
     private SerialPort currentComPort=null;
-    private RawDataDisplay rawDataDisplay=new RawDataDisplay(packetListener.getCircularBuffer());
 
 
     public GUI_MainWindow(){
-        super("Happy Serial Plotter");
+        super("Happy Serial Plotter (c) ENSEA");
         WindowListener l = new WindowAdapter() {
             public void windowClosing(WindowEvent e){
                 System.exit(0);
@@ -47,11 +47,11 @@ public class GUI_MainWindow extends JFrame{
 
         centerPanel.add(dataVisualizer,BorderLayout.CENTER);
 
-        xAxisSlider.setMaximum(1024);
-        xAxisSlider.setMinimum(128);
-        xAxisSlider.setValue(128);
+        xAxisSlider.setMaximum(256);
+        xAxisSlider.setMinimum(10);
+        xAxisSlider.setValue(100);
         xAxisSlider.addChangeListener((e)-> {
-                packetListener.setBufferSize(xAxisSlider.getValue());
+                dataVisualizer.setxAxis(xAxisSlider.getValue());
                 xAxisLabel.setText("Echelle X : "+xAxisSlider.getValue());        });
         lowerPanel.add(xAxisLabel,0);
         lowerPanel.add(xAxisSlider,1);
@@ -81,6 +81,7 @@ public class GUI_MainWindow extends JFrame{
         this.add(globalPanel);
         this.setSize(800,600);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setResizable(false);
         this.setVisible(true);
 
         dataButton.addActionListener((e)->this.rawDataDisplay.toggleVisibility());
