@@ -14,7 +14,7 @@ public class ConnexionStatus extends JComponent implements Runnable {
         super.paint(g);
         g.setFont(new Font("Arial",Font.BOLD,12));
         g.setColor(Color.BLACK);
-        g.drawString("Connection",0,16);
+        g.drawString("Status",0,16);
         switch (status){
             case Running :
                 g.setColor(Color.GREEN);
@@ -26,7 +26,7 @@ public class ConnexionStatus extends JComponent implements Runnable {
                 g.setColor(Color.ORANGE);
                 break;
         }
-        g.fillOval(70,3,15,15);
+        g.fillOval(45,3,15,15);
     }
 
     public void startRunning(){

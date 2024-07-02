@@ -18,14 +18,16 @@ public class GUI_MainWindow extends JFrame{
     private PacketListener packetListener= new PacketListener(connexionStatus,rawDataDisplay);
     private DataVisualizer dataVisualizer = new DataVisualizer(packetListener.getCircularBuffer());
     private JButton runButton = new JButton("RUN");
-    private JButton dataButton = new JButton("DATA");
+    private JButton dataViewerButton = new JButton("VIEWER");
     private JSlider xAxisSlider = new JSlider ();
-    private JLabel xAxisLabel = new JLabel("Echelle X : 128");
+    private JLabel xAxisLabel = new JLabel("Xmax : 128");
     private JSlider yAxisSlider = new JSlider ();
-    private JLabel yAxisLabel = new JLabel("Echelle Y : 1024");
+    private JLabel yAxisLabel = new JLabel("Ymax : 1024");
     private JCheckBox isTriggered = new JCheckBox();
     private JLabel isTriggeredLable = new JLabel("Trigger");
     private SerialPort currentComPort=null;
+    private DataSender dataSender = new DataSender();
+    private JButton displayDataSender = new JButton("SENDER");
 
 
     public GUI_MainWindow(){
@@ -52,7 +54,7 @@ public class GUI_MainWindow extends JFrame{
         xAxisSlider.setValue(100);
         xAxisSlider.addChangeListener((e)-> {
                 dataVisualizer.setxAxis(xAxisSlider.getValue());
-                xAxisLabel.setText("Echelle X : "+xAxisSlider.getValue());        });
+                xAxisLabel.setText("Xmax : "+xAxisSlider.getValue());        });
         lowerPanel.add(xAxisLabel,0);
         lowerPanel.add(xAxisSlider,1);
 
@@ -61,7 +63,7 @@ public class GUI_MainWindow extends JFrame{
         yAxisSlider.setValue(1024);
         yAxisSlider.addChangeListener((e)->{
             dataVisualizer.setyAxis(yAxisSlider.getValue());
-            yAxisLabel.setText("Echelle Y : "+yAxisSlider.getValue());});
+            yAxisLabel.setText("Ymax : "+yAxisSlider.getValue());});
 
         lowerPanel.add(yAxisLabel,2);
         lowerPanel.add(yAxisSlider,3);
@@ -72,7 +74,8 @@ public class GUI_MainWindow extends JFrame{
 
         lowerPanel.add(connexionStatus,6);
 
-        lowerPanel.add(dataButton,7);
+        lowerPanel.add(dataViewerButton,7);
+        lowerPanel.add(displayDataSender,8);
 
         globalPanel.add(upperPanel,BorderLayout.NORTH);
         globalPanel.add(centerPanel,BorderLayout.CENTER);
@@ -84,7 +87,9 @@ public class GUI_MainWindow extends JFrame{
         this.setResizable(false);
         this.setVisible(true);
 
-        dataButton.addActionListener((e)->this.rawDataDisplay.toggleVisibility());
+        dataViewerButton.addActionListener((e)->this.rawDataDisplay.toggleVisibility());
+        displayDataSender.addActionListener((e)->this.dataSender.toggleVisibility());
+
 
         runButton.addActionListener((e)->{
             isRunning = ! isRunning;

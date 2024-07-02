@@ -49,7 +49,8 @@ public class DataVisualizer extends JComponent {
         // --- Draw values ---
         graphics.setColor( Color.BLACK );
         graphics.drawString( "0", (int)(getWidth()*0.02), (int)(getHeight()*0.98));
-        graphics.drawString( Integer.toString(xAxis), (int)(getWidth()*0.98), (int)(getHeight()*0.98));
+        graphics.drawString( Integer.toString(xAxis), (int)(getWidth()*0.95), (int)(getHeight()*0.98));
+        graphics.drawString( Integer.toString(xAxis/2), (int)(getWidth()*0.49), (int)(getHeight()*0.98));
         graphics.drawString( Integer.toString(-yAxis/2), (int)(getWidth()*0.01), (int)(getHeight()*0.96));
         graphics.drawString( "+"+Integer.toString(yAxis/2), (int)(getWidth()*0.01), (int)(getHeight()*0.04));
 
